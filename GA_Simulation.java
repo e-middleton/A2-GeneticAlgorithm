@@ -2,55 +2,69 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
 
+/**
+ * Class for creating and running a genetic algorithms simulation.
+ */
 public class GA_Simulation {
-
+  
   private int numIndividuals;
   private int numWinners;
   private int numRounds;
   private int c_0;
   private int c_max;
   private float m;
-  private int numLetters;
-  ArrayList<Individual> curr_population;
+  private int geneStates;
+  ArrayList<Individual> population;
 
   // Use the instructions to identify the class variables, constructors, and methods you need
   public static Random rng;
 
-  public GA_Simulation(int numIndividuals, int numWinners, int numRounds, int c_0, int c_max, float m, int numLetters){
+  /**
+   * Constructor for the GA_Simulation class objects.
+   * @param numIndividuals the number of individuals in the population.
+   * @param numWinners the number of winners, or individuals allowed to reproduce, in each generation.
+   * @param numRounds the number of rounds for which the simulation is run.
+   * @param c_0 the initial chromosome size of the individuals.
+   * @param c_max the maximum chromosome size for the individuals.
+   * @param m the mutation rate of each gene per round.
+   * @param geneStates the number of possible states for a given gene
+   */
+  public GA_Simulation(int numIndividuals, int numWinners, int numRounds, int c_0, int c_max, float m, int geneStates){
     this.numIndividuals = numIndividuals;
     this.numWinners = numWinners;
     this.numRounds = numRounds;
     this.c_0 = c_0;
     this.c_max = c_max;
     this.m = m;
-    this.numLetters = numLetters;
+    this.geneStates = geneStates;
   }
 
-  /*
-   * To do this, you should write a method called `init` that initializes a population of the desired size, calling the `Individual` setup constructor ***n*** times to create a population of ***n*** Individuals.
-Remember to pass `rng` to the constructor.
-This will be your founding generation of creatures.
+
+  /**
+   * Method for initializing a population of size numIndividuals, and 
+   * it calls the constructor for individuals that does NOT use sexual reproduction. 
+   * This method gives the starting population for the GA_Simulation.
+   * @param numIndividuals the number of individuals in the population
+   * @param rng a Random object used to randomize genes in the individuals chromosome
+   * @param c_0 the initial size of the chromosome of an individual
+   * @param geneStates the number of possible states (letters) that a gene can take
    */
-
-   public void init(int numIndividuals, Random rng, int c_0, int numLetters){
-
-    this.curr_population = new ArrayList<Individual>(numIndividuals);
-
+  public void init(int numIndividuals, Random rng, int c_0, int geneStates){
+    this.population = new ArrayList<Individual>(numIndividuals);
+    
     for(int i = 0; i < numIndividuals; i++){
-      this.curr_population.add(new Individual(c_0, numLetters, rng));
+      this.population.add(new Individual(c_0, geneStates, rng));
     }
-
-   }
-
+  }
 
 
   /** Provided method that prints out summary statistics for a given
    * generation, based on the information provided
-   * @param roundNumber: Which round of evolution are we on, from 0 to n
-   * @param bestFitness: Fitness of top-ranked (most fit) individual
-   * @param kthFitness: Fitness of kth-ranked individual
-   * @param leastFitness: Fitness of lowest-ranked (least fit) individual
-   * @param best: Individual with highest fitness
+   * @param roundNumber Which round of evolution are we on, from 0 to n
+   * @param bestFitness Fitness of top-ranked (most fit) individual
+   * @param kthFitness Fitness of kth-ranked individual
+   * @param leastFitness Fitness of lowest-ranked (least fit) individual
+   * @param best Individual with highest fitness
    * @return: Nothing, prints statistics to standard out
    */
   private void printGenInfo(int roundNumber, int bestFitness, int kthFitness, int leastFitness, Individual best) {
@@ -64,7 +78,7 @@ This will be your founding generation of creatures.
   }
 
   /** Provided method that sorts population by fitness score, best first
-   * @param pop: ArrayList of Individuals in the current generation
+   * @param pop ArrayList of Individuals in the current generation
    * @return: Nothing. ArrayList is sorted in place
    */
   public void rankPopulation(ArrayList<Individual> pop) {
@@ -80,24 +94,24 @@ This will be your founding generation of creatures.
 
   /**
    * Method to evolve the current population in the genetic simulation
-   * @param rng the Random object used to randomize the genes
+   * @param rng the Random object used to randomize the genes, prefix and suffix length for sexual reproduction,
+   * and mutation rates of genes.
    */
   public void evolve(Random rng){
-    // sort out the winners (assumes that rankPopulation has already been run)
 
+    // sort out the winners (assumes that rankPopulation has already been run)
     ArrayList<Individual> winners = new ArrayList<Individual>(this.numWinners);
     for(int i = 0; i < this.numWinners; i++){
-      winners.add(this.curr_population.get(i));
+      winners.add(this.population.get(i));
     }
 
-    this.curr_population = new ArrayList<Individual>(this.numIndividuals); // clear out old population
+    this.population = new ArrayList<Individual>(this.numIndividuals); // clear out old population
 
     // randomly select 2 individuals numIndividuals times to make the next population
     for(int i = 0; i < this.numIndividuals; i++){
       Individual parent1 = winners.get(rng.nextInt(this.numWinners));
       Individual parent2 = winners.get(rng.nextInt(this.numWinners));
-      this.curr_population.add(new Individual(parent1, parent2, this.c_max, this.m, this.numLetters, rng));
-
+      this.population.add(new Individual(parent1, parent2, this.c_max, this.m, this.geneStates, rng));
     }
   }
 
@@ -105,28 +119,31 @@ This will be your founding generation of creatures.
    * method to run the genetic simulation and output the results
    */
   public void run(){
-    this.init(this.numIndividuals, rng, this.c_0, this.numLetters); // initialize the population
-    this.rankPopulation(this.curr_population); // rank the population
-    this.printGenInfo(1, this.curr_population.get(0).getFitness(), this.curr_population.get(numWinners-1).getFitness(), 
-    this.curr_population.get(this.curr_population.size()-1).getFitness(), this.curr_population.get(0));
+    init(this.numIndividuals, rng, this.c_0, this.geneStates); // initialize the population
+    rankPopulation(this.population); // rank the population
+    printGenInfo(1, this.population.get(0).getFitness(), this.population.get(numWinners-1).getFitness(), 
+    this.population.get(this.population.size()-1).getFitness(), this.population.get(0));
 
     for (int i = 2; i <= this.numRounds; i++){
-      this.evolve(rng); // evolve the current population
-      this.rankPopulation(this.curr_population); // rank the population
-      this.printGenInfo(i, this.curr_population.get(0).getFitness(), this.curr_population.get(numWinners-1).getFitness(), 
-      this.curr_population.get(this.curr_population.size()-1).getFitness(), this.curr_population.get(0));
-
+      evolve(rng); // evolve the current population
+      rankPopulation(this.population); // rank the population
+      printGenInfo(i, this.population.get(0).getFitness(), this.population.get(numWinners-1).getFitness(), 
+      this.population.get(this.population.size()-1).getFitness(), this.population.get(0));
     }
 
   }
 
+  /**
+   * Main method, used for creating, running, and debugging the GA_Simulation.
+   * @param args
+   */
   public static void main(String[] args) {
     // This first block of code establishes a random seed, which will make
     // it easier to test your code. The output should remain consistent if the
     // seed is the same. To run with a specific seed, you can run from the
     // command line like:
     //                    java GA_Simulation 24601
-
+    
     long seed = System.currentTimeMillis(); // default
     if (args.length > 0) {
       try {
@@ -138,9 +155,7 @@ This will be your founding generation of creatures.
     rng = new Random(seed);
     
     // Write your main below:
-    GA_Simulation test = new GA_Simulation(10, 3, 10, 8, 20, 0.01f, 5);
+    GA_Simulation test = new GA_Simulation(100, 10, 20, 8, 20, 0.03f, 5);
     test.run();
-
   }
-
 }
