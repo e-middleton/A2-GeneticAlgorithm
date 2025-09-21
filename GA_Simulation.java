@@ -65,7 +65,6 @@ public class GA_Simulation {
    * @param kthFitness Fitness of kth-ranked individual
    * @param leastFitness Fitness of lowest-ranked (least fit) individual
    * @param best Individual with highest fitness
-   * @return: Nothing, prints statistics to standard out
    */
   private void printGenInfo(int roundNumber, int bestFitness, int kthFitness, int leastFitness, Individual best) {
     System.out.println("Round " + roundNumber + ":");
@@ -79,7 +78,6 @@ public class GA_Simulation {
 
   /** Provided method that sorts population by fitness score, best first
    * @param pop ArrayList of Individuals in the current generation
-   * @return: Nothing. ArrayList is sorted in place
    */
   public void rankPopulation(ArrayList<Individual> pop) {
     // sort population by fitness
