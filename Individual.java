@@ -27,7 +27,6 @@ public class Individual {
         for (int i = 0; i < c_0; i++){
             this.chromosome.add(randomLetter(geneStates, rng)); // fill in chromosome with random letters
         }
-
     }
 
     /**
@@ -116,7 +115,7 @@ public class Individual {
      * Provided method to choose a letter at random, in the range from A to the number of states indicated
      * @param geneStates The number of letters available to choose from (number of possible states) for a gene
      * @param rng The random number generator being used for the current run
-     * @return The letter as a Character
+     * @return a randomized Character
      */
     private Character randomLetter(int geneStates, Random rng) {
         return Character.valueOf((char)(65 + rng.nextInt(geneStates)));
@@ -148,8 +147,8 @@ public class Individual {
 
 
     /**
-     * Main method for testing and debugging.
-     * @param args 
+     * Main method for testing and debugging the class Individual.
+     * @param args command line arguments
      */
     public static void main(String[] args) {
         // This code will set a random seed when you're testing Individual (i.e., running it without GA_Simulation)

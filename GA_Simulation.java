@@ -130,12 +130,11 @@ public class GA_Simulation {
       printGenInfo(i, this.population.get(0).getFitness(), this.population.get(numWinners-1).getFitness(), 
       this.population.get(this.population.size()-1).getFitness(), this.population.get(0));
     }
-
   }
 
   /**
    * Main method, used for creating, running, and debugging the GA_Simulation.
-   * @param args
+   * @param args command line arguments.
    */
   public static void main(String[] args) {
     // This first block of code establishes a random seed, which will make
