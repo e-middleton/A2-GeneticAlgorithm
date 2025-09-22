@@ -141,29 +141,29 @@ public class GA_Simulation {
   }
 
 
-  // /**
-  //  * Main method, used for creating, running, and debugging the GA_Simulation.
-  //  * @param args command line arguments.
-  //  */
-  // public static void main(String[] args) {
-  //   // This first block of code establishes a random seed, which will make
-  //   // it easier to test your code. The output should remain consistent if the
-  //   // seed is the same. To run with a specific seed, you can run from the
-  //   // command line like:
-  //   //                    java GA_Simulation 24601
+  /**
+   * Main method, used for creating, running, and debugging the GA_Simulation.
+   * @param args command line arguments.
+   */
+  public static void main(String[] args) {
+    // This first block of code establishes a random seed, which will make
+    // it easier to test your code. The output should remain consistent if the
+    // seed is the same. To run with a specific seed, you can run from the
+    // command line like:
+    //                    java GA_Simulation 24601
     
-  //   long seed = System.currentTimeMillis(); // default
-  //   if (args.length > 0) {
-  //     try {
-  //       seed = Long.parseLong(args[0]);
-  //     } catch (NumberFormatException e) {
-  //       System.err.println("Seed wasn't passed so using current time.");
-  //     }
-  //   }
-  //   rng = new Random(seed);
+    long seed = System.currentTimeMillis(); // default
+    if (args.length > 0) {
+      try {
+        seed = Long.parseLong(args[0]);
+      } catch (NumberFormatException e) {
+        System.err.println("Seed wasn't passed so using current time.");
+      }
+    }
+    rng = new Random(seed);
     
-  //   // Write your main below:
-  //   GA_Simulation test = new GA_Simulation(100, 15, 20, 5, 20, 0.1f, 10);
-  //   test.run();
-  // }
+    // Write your main below:
+    GA_Simulation test = new GA_Simulation(100, 15, 20, 5, 20, 0.1f, 10);
+    test.run();
+  }
 }
