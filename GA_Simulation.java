@@ -6,7 +6,6 @@ import java.util.Random;
  * Class for creating and running a genetic algorithms simulation.
  */
 public class GA_Simulation {
-  
   private int numIndividuals;
   private int numWinners;
   private int numRounds;
@@ -54,6 +53,20 @@ public class GA_Simulation {
     }
   }
 
+  /**
+   * Method to output information about a given generation,
+   * including the fitness of the fittest individual, the last winning individual,
+   * and the least fit, as well as the "winning" chromosome.
+   * @param roundNumber the current generation number
+   */
+  public void describeGeneration(int roundNumber){
+    int fittestScore = this.population.get(0).getFitness(); // called after sorting
+    int lastWinnerScore = this.population.get(numWinners-1).getFitness();
+    int worstScore = this.population.get(this.population.size() - 1).getFitness();
+    Individual fittestIndividual = this.population.get(0);
+
+    printGenInfo(roundNumber, fittestScore, lastWinnerScore, worstScore, fittestIndividual);
+  }
 
   /** Provided method that prints out summary statistics for a given
    * generation, based on the information provided
@@ -110,20 +123,6 @@ public class GA_Simulation {
     }
   }
 
-  /**
-   * Method to output information about a given generation,
-   * including the fitness of the fittest individual, the last winning individual,
-   * and the least fit, as well as the "winning" chromosome.
-   * @param roundNumber the current generation number
-   */
-  public void describeGeneration(int roundNumber){
-    int fittestScore = this.population.get(0).getFitness(); // called after sorting
-    int lastWinnerScore = this.population.get(numWinners-1).getFitness();
-    int worstScore = this.population.get(this.population.size() - 1).getFitness();
-    Individual fittestIndividual = this.population.get(0);
-
-    printGenInfo(roundNumber, fittestScore, lastWinnerScore, worstScore, fittestIndividual);
-  }
 
   /**
    * method to run the genetic simulation and output the results
