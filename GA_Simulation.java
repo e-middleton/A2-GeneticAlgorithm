@@ -74,7 +74,7 @@ public class GA_Simulation {
    * @param bestFitness Fitness of top-ranked (most fit) individual
    * @param kthFitness Fitness of kth-ranked individual
    * @param leastFitness Fitness of lowest-ranked (least fit) individual
-   * @param best Individual with highest fitness
+   * @param best the chromosome of the Individual with highest fitness
    */
   public void printGenInfo(int roundNumber, int bestFitness, int kthFitness, int leastFitness, Individual best) {
     System.out.println("Round " + roundNumber + ":");
@@ -130,7 +130,7 @@ public class GA_Simulation {
   public void run(){
     init(); // initialize the population
     rankPopulation(this.population); // rank the population
-    describeGeneration(0);
+    // describeGeneration(0);
 
     for (int i = 1; i <= this.numRounds; i++){
       evolve(); // evolve the current population
