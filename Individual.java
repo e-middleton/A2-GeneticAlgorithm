@@ -146,26 +146,25 @@ public class Individual {
 
 
 
-    /**
-     * Main method for testing and debugging the class Individual.
-     * @param args command line arguments
-     */
-    public static void main(String[] args) {
-        // This code will set a random seed when you're testing Individual (i.e., running it without GA_Simulation)
-        Random rng = new Random(System.currentTimeMillis());
+    // /**
+    //  * Main method for testing and debugging the class Individual.
+    //  * @param args command line arguments
+    //  */
+    // public static void main(String[] args) {
+    //     // This code will set a random seed when you're testing Individual (i.e., running it without GA_Simulation)
+    //     Random rng = new Random(System.currentTimeMillis());
 
-        // You can pass rng, as defined above, to your constructors.
-        Individual a = new Individual(8, 5, rng);
-        Individual b = new Individual(8, 5, rng);
+    //     // You can pass rng, as defined above, to your constructors.
+    //     Individual a = new Individual(8, 5, rng);
+    //     Individual b = new Individual(8, 5, rng);
 
-        Individual ab = new Individual(a, b, 10, 0.21f, 8, rng);
-        System.out.println(a);
-        System.out.println(b);
-        System.out.println(ab);
+    //     Individual ab = new Individual(a, b, 10, 0.21f, 8, rng);
+    //     System.out.println(a);
+    //     System.out.println(b);
+    //     System.out.println(ab);
 
-        System.out.println(a.getFitness());
-        System.out.println(b.getFitness());
-        System.out.println(ab.getFitness());
-    }
-
+    //     System.out.println(a.getFitness());
+    //     System.out.println(b.getFitness());
+    //     System.out.println(ab.getFitness());
+    // }
 }
