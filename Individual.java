@@ -158,7 +158,7 @@ public class Individual {
     //     Individual a = new Individual(8, 5, rng);
     //     Individual b = new Individual(8, 5, rng);
 
-    //     Individual ab = new Individual(a, b, 10, 0.21f, 8, rng);
+    //     Individual ab = new Individual(a, b, 10, 0.21f, 9, rng);
     //     System.out.println(a);
     //     System.out.println(b);
     //     System.out.println(ab);
