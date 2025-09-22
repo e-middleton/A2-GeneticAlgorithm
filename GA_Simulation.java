@@ -14,7 +14,7 @@ public class GA_Simulation {
   private int c_max;
   private float m;
   private int geneStates;
-  private ArrayList<Individual> population;
+  public ArrayList<Individual> population;
 
   // Use the instructions to identify the class variables, constructors, and methods you need
   public static Random rng;
@@ -45,7 +45,7 @@ public class GA_Simulation {
    * it calls the constructor for individuals that does NOT use sexual reproduction. 
    * This method gives the starting population for the GA_Simulation.
    */
-  public void init(){
+  private void init(){
     this.population = new ArrayList<Individual>(this.numIndividuals);
     
     for(int i = 0; i < numIndividuals; i++){
@@ -75,7 +75,7 @@ public class GA_Simulation {
   /** Provided method that sorts population by fitness score, best first
    * @param pop ArrayList of Individuals in the current generation
    */
-  public void rankPopulation(ArrayList<Individual> pop) {
+  private void rankPopulation(ArrayList<Individual> pop) {
     // sort population by fitness
     Comparator<Individual> ranker = new Comparator<>() {
       // this order will sort higher scores at the front
@@ -90,7 +90,7 @@ public class GA_Simulation {
    * Method to evolve the current population in the genetic simulation
    * and mutation rates of genes.
    */
-  public void evolve(){
+  private void evolve(){
     // sort out the winners (assumes that rankPopulation has already been run)
     ArrayList<Individual> winners = new ArrayList<Individual>(this.numWinners);
     for(int i = 0; i < this.numWinners; i++){
@@ -146,7 +146,7 @@ public class GA_Simulation {
     rng = new Random(seed);
     
     // Write your main below:
-    GA_Simulation test = new GA_Simulation(100, 10, 20, 8, 20, 0.03f, 5);
+    GA_Simulation test = new GA_Simulation(100, 10, 20, 5, 20, 0.03f, 5);
     test.run();
   }
 }
