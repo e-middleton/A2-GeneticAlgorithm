@@ -44,8 +44,9 @@ public class GA_Simulation {
    * Method for initializing a population of size numIndividuals, and 
    * it calls the constructor for individuals that does NOT use sexual reproduction. 
    * This method gives the starting population for the GA_Simulation.
+   * Method was made public because of the autograder.
    */
-  private void init(){
+  public void init(){
     this.population = new ArrayList<Individual>(this.numIndividuals);
     
     for(int i = 0; i < numIndividuals; i++){
