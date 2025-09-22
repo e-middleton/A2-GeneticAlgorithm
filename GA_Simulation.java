@@ -131,8 +131,7 @@ public class GA_Simulation {
   public void run(){
     init(); // initialize the population
     rankPopulation(this.population); // rank the population
-    printGenInfo(1, this.population.get(0).getFitness(), this.population.get(numWinners-1).getFitness(), 
-    this.population.get(this.population.size()-1).getFitness(), this.population.get(0));
+    describeGeneration(1);
 
     for (int i = 2; i <= this.numRounds; i++){
       evolve(); // evolve the current population
@@ -163,7 +162,7 @@ public class GA_Simulation {
     rng = new Random(seed);
     
     // Write your main below:
-    GA_Simulation test = new GA_Simulation(100, 10, 20, 5, 20, 0.03f, 5);
+    GA_Simulation test = new GA_Simulation(100, 10, 20, 5, 20, 0.1f, 10);
     test.run();
   }
 }
