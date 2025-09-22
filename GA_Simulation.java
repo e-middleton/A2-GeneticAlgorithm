@@ -66,8 +66,8 @@ public class GA_Simulation {
   public void printGenInfo(int roundNumber, int bestFitness, int kthFitness, int leastFitness, Individual best) {
     System.out.println("Round " + roundNumber + ":");
     System.out.println("Best fitness: " + bestFitness);
-    // System.out.println("k-th (" + k + ") fitness: " + kthFitness);
-    System.out.println("k-th fitness: " + kthFitness);
+    System.out.println("k-th (" + this.numWinners + ") fitness: " + kthFitness);
+    // System.out.println("k-th fitness: " + kthFitness);
     System.out.println("Least fit: " + leastFitness);
     System.out.println("Best chromosome: " + best);
     System.out.println(); // blank line to match the example format
@@ -89,7 +89,9 @@ public class GA_Simulation {
 
   /**
    * Method to evolve the current population in the genetic simulation
-   * and mutation rates of genes.
+   * through sexual reproduction of Individuals and gene mutations.
+   * Modifies the population ArrayList in place and does not return a new 
+   * population.
    */
   public void evolve(){
     // sort out the winners (assumes that rankPopulation has already been run)
@@ -110,7 +112,7 @@ public class GA_Simulation {
 
   /**
    * Method to output information about a given generation,
-   * including the fitness of the fittest individual, the 'k'th individual,
+   * including the fitness of the fittest individual, the last winning individual,
    * and the least fit, as well as the "winning" chromosome.
    * @param roundNumber the current generation number
    */
