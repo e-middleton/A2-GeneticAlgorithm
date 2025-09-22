@@ -128,15 +128,31 @@ public class GA_Simulation {
   /**
    * method to run the genetic simulation and output the results
    */
+  // public void run(){
+  //   init(); // initialize the population
+  //   rankPopulation(this.population); // rank the population
+  //   describeGeneration(1);
+
+  //   for (int i = 2; i <= this.numRounds; i++){
+  //     evolve(); // evolve the current population
+  //     rankPopulation(this.population); // rank the population
+  //     describeGeneration(i);
+  //   }
+  // }
+  /**
+   * method to run the genetic simulation and output the results
+   */
   public void run(){
     init(); // initialize the population
     rankPopulation(this.population); // rank the population
-    describeGeneration(1);
+    printGenInfo(1, this.population.get(0).getFitness(), this.population.get(numWinners-1).getFitness(), 
+    this.population.get(this.population.size()-1).getFitness(), this.population.get(0));
 
     for (int i = 2; i <= this.numRounds; i++){
       evolve(); // evolve the current population
       rankPopulation(this.population); // rank the population
-      describeGeneration(i);
+      printGenInfo(i, this.population.get(0).getFitness(), this.population.get(numWinners-1).getFitness(), 
+      this.population.get(this.population.size()-1).getFitness(), this.population.get(0));
     }
   }
 
