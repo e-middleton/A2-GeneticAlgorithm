@@ -63,7 +63,7 @@ public class GA_Simulation {
    * @param leastFitness Fitness of lowest-ranked (least fit) individual
    * @param best Individual with highest fitness
    */
-  private void printGenInfo(int roundNumber, int bestFitness, int kthFitness, int leastFitness, Individual best) {
+  public void printGenInfo(int roundNumber, int bestFitness, int kthFitness, int leastFitness, Individual best) {
     System.out.println("Round " + roundNumber + ":");
     System.out.println("Best fitness: " + bestFitness);
     // System.out.println("k-th (" + k + ") fitness: " + kthFitness);
@@ -76,7 +76,7 @@ public class GA_Simulation {
   /** Provided method that sorts population by fitness score, best first
    * @param pop ArrayList of Individuals in the current generation
    */
-  private void rankPopulation(ArrayList<Individual> pop) {
+  public void rankPopulation(ArrayList<Individual> pop) {
     // sort population by fitness
     Comparator<Individual> ranker = new Comparator<>() {
       // this order will sort higher scores at the front
@@ -91,7 +91,7 @@ public class GA_Simulation {
    * Method to evolve the current population in the genetic simulation
    * and mutation rates of genes.
    */
-  private void evolve(){
+  public void evolve(){
     // sort out the winners (assumes that rankPopulation has already been run)
     ArrayList<Individual> winners = new ArrayList<Individual>(this.numWinners);
     for(int i = 0; i < this.numWinners; i++){
