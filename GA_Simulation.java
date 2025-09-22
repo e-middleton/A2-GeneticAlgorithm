@@ -109,6 +109,21 @@ public class GA_Simulation {
   }
 
   /**
+   * Method to output information about a given generation,
+   * including the fitness of the fittest individual, the 'k'th individual,
+   * and the least fit, as well as the "winning" chromosome.
+   * @param roundNumber the current generation number
+   */
+  public void describeGeneration(int roundNumber){
+    int fittestScore = this.population.get(0).getFitness(); // called after sorting
+    int lastWinnerScore = this.population.get(numWinners-1).getFitness();
+    int worstScore = this.population.get(this.population.size() - 1).getFitness();
+    Individual fittestIndividual = this.population.get(0);
+
+    printGenInfo(roundNumber, fittestScore, lastWinnerScore, worstScore, fittestIndividual);
+  }
+
+  /**
    * method to run the genetic simulation and output the results
    */
   public void run(){
@@ -120,8 +135,7 @@ public class GA_Simulation {
     for (int i = 2; i <= this.numRounds; i++){
       evolve(); // evolve the current population
       rankPopulation(this.population); // rank the population
-      printGenInfo(i, this.population.get(0).getFitness(), this.population.get(numWinners-1).getFitness(), 
-      this.population.get(this.population.size()-1).getFitness(), this.population.get(0));
+      describeGeneration(i);
     }
   }
 
