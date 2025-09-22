@@ -130,9 +130,9 @@ public class GA_Simulation {
   public void run(){
     init(); // initialize the population
     rankPopulation(this.population); // rank the population
-    describeGeneration(1);
+    describeGeneration(0);
 
-    for (int i = 2; i <= this.numRounds; i++){
+    for (int i = 1; i < this.numRounds; i++){
       evolve(); // evolve the current population
       rankPopulation(this.population); // rank the population
       describeGeneration(i);
