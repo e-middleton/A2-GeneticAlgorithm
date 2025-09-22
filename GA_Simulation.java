@@ -132,7 +132,7 @@ public class GA_Simulation {
     rankPopulation(this.population); // rank the population
     // describeGeneration(0);
 
-    for (int i = 0; i < this.numRounds; i++){
+    for (int i = 0; i <= this.numRounds; i++){
       evolve(); // evolve the current population
       rankPopulation(this.population); // rank the population
       describeGeneration(i);
