@@ -14,7 +14,7 @@ public class GA_Simulation {
   private int c_max;
   private float m;
   private int geneStates;
-  ArrayList<Individual> population;
+  private ArrayList<Individual> population;
 
   // Use the instructions to identify the class variables, constructors, and methods you need
   public static Random rng;
@@ -44,16 +44,12 @@ public class GA_Simulation {
    * Method for initializing a population of size numIndividuals, and 
    * it calls the constructor for individuals that does NOT use sexual reproduction. 
    * This method gives the starting population for the GA_Simulation.
-   * @param numIndividuals the number of individuals in the population
-   * @param rng a Random object used to randomize genes in the individuals chromosome
-   * @param c_0 the initial size of the chromosome of an individual
-   * @param geneStates the number of possible states (letters) that a gene can take
    */
-  public void init(int numIndividuals, Random rng, int c_0, int geneStates){
-    this.population = new ArrayList<Individual>(numIndividuals);
+  public void init(){
+    this.population = new ArrayList<Individual>(this.numIndividuals);
     
     for(int i = 0; i < numIndividuals; i++){
-      this.population.add(new Individual(c_0, geneStates, rng));
+      this.population.add(new Individual(this.c_0, this.geneStates, rng));
     }
   }
 
@@ -92,11 +88,9 @@ public class GA_Simulation {
 
   /**
    * Method to evolve the current population in the genetic simulation
-   * @param rng the Random object used to randomize the genes, prefix and suffix length for sexual reproduction,
    * and mutation rates of genes.
    */
-  public void evolve(Random rng){
-
+  public void evolve(){
     // sort out the winners (assumes that rankPopulation has already been run)
     ArrayList<Individual> winners = new ArrayList<Individual>(this.numWinners);
     for(int i = 0; i < this.numWinners; i++){
@@ -117,13 +111,13 @@ public class GA_Simulation {
    * method to run the genetic simulation and output the results
    */
   public void run(){
-    init(this.numIndividuals, rng, this.c_0, this.geneStates); // initialize the population
+    init(); // initialize the population
     rankPopulation(this.population); // rank the population
     printGenInfo(1, this.population.get(0).getFitness(), this.population.get(numWinners-1).getFitness(), 
     this.population.get(this.population.size()-1).getFitness(), this.population.get(0));
 
     for (int i = 2; i <= this.numRounds; i++){
-      evolve(rng); // evolve the current population
+      evolve(); // evolve the current population
       rankPopulation(this.population); // rank the population
       printGenInfo(i, this.population.get(0).getFitness(), this.population.get(numWinners-1).getFitness(), 
       this.population.get(this.population.size()-1).getFitness(), this.population.get(0));
