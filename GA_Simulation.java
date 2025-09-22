@@ -77,7 +77,7 @@ public class GA_Simulation {
    * @param best Individual with highest fitness
    */
   public void printGenInfo(int roundNumber, int bestFitness, int kthFitness, int leastFitness, Individual best) {
-    System.out.println("Round " + roundNumber + ":");
+    System.out.println("Round: " + roundNumber);
     System.out.println("Best fitness: " + bestFitness);
     System.out.println("k-th (" + this.numWinners + ") fitness: " + kthFitness);
     // System.out.println("k-th fitness: " + kthFitness);
