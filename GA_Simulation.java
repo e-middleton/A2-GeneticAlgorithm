@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class GA_Simulation {
   private int numIndividuals;
-  private int k;
+  private int numWinners;
   private int numRounds;
   private int c_0;
   private int c_max;
@@ -21,7 +21,7 @@ public class GA_Simulation {
   /**
    * Constructor for the GA_Simulation class objects.
    * @param numIndividuals the number of individuals in the population.
-   * @param k the number of winners, or individuals allowed to reproduce, in each generation.
+   * @param numWinners the number of winners, or individuals allowed to reproduce, in each generation.
    * @param numRounds the number of rounds for which the simulation is run.
    * @param c_0 the initial chromosome size of the individuals.
    * @param c_max the maximum chromosome size for the individuals.
@@ -30,7 +30,7 @@ public class GA_Simulation {
    */
   public GA_Simulation(int numIndividuals, int numWinners, int numRounds, int c_0, int c_max, float m, int geneStates){
     this.numIndividuals = numIndividuals;
-    this.k = numWinners;
+    this.numWinners = numWinners;
     this.numRounds = numRounds;
     this.c_0 = c_0;
     this.c_max = c_max;
@@ -61,7 +61,7 @@ public class GA_Simulation {
    */
   public void describeGeneration(int roundNumber){
     int fittestScore = this.population.get(0).getFitness(); // called after sorting
-    int lastWinnerScore = this.population.get(this.k-1).getFitness();
+    int lastWinnerScore = this.population.get(numWinners-1).getFitness();
     int worstScore = this.population.get(this.population.size() - 1).getFitness();
     Individual fittestIndividual = this.population.get(0);
 
@@ -79,7 +79,7 @@ public class GA_Simulation {
   public void printGenInfo(int roundNumber, int bestFitness, int kthFitness, int leastFitness, Individual best) {
     System.out.println("Round " + roundNumber + ":");
     System.out.println("Best fitness: " + bestFitness);
-    System.out.println("k-th (" + k + ") fitness: " + kthFitness);
+    System.out.println("k-th (" + this.numWinners + ") fitness: " + kthFitness);
     // System.out.println("k-th fitness: " + kthFitness);
     System.out.println("Least fit: " + leastFitness);
     System.out.println("Best chromosome: " + best);
@@ -108,8 +108,8 @@ public class GA_Simulation {
    */
   public void evolve(){
     // sort out the winners (assumes that rankPopulation has already been run)
-    ArrayList<Individual> winners = new ArrayList<Individual>(this.k);
-    for(int i = 0; i < this.k; i++){
+    ArrayList<Individual> winners = new ArrayList<Individual>(this.numWinners);
+    for(int i = 0; i < this.numWinners; i++){
       winners.add(this.population.get(i));
     }
 
@@ -117,8 +117,8 @@ public class GA_Simulation {
 
     // randomly select 2 individuals numIndividuals times to make the next population
     for(int i = 0; i < this.numIndividuals; i++){
-      Individual parent1 = winners.get(rng.nextInt(this.k));
-      Individual parent2 = winners.get(rng.nextInt(this.k));
+      Individual parent1 = winners.get(rng.nextInt(this.numWinners));
+      Individual parent2 = winners.get(rng.nextInt(this.numWinners));
       this.population.add(new Individual(parent1, parent2, this.c_max, this.m, this.geneStates, rng));
     }
   }
