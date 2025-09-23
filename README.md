@@ -4,7 +4,7 @@ Your readme should include the following information. Each student needs to subm
 
 Group Members: NA
 
-Any peers and/or TAs/Tutors you collaborated with: NA
+Any peers and/or TAs/Tutors you collaborated with: I didn't collaborate with anybody for code development, but I talked to Tanya and Jade about why my code might have been failing the autograder for describeGeneration and run but we couldn't figure out what the problem was.
 
 Would you like to give "kudos" to anyone who was particularly supportive or helpful?
 
@@ -25,10 +25,11 @@ if I tried to force a genetic bottleneck (numWinners=1), the winner still had a 
 
 Please provide a reflection on your experience with this assignment-- what was interesting? what was hard? what do you feel like you learned?
 
-It was neat, it felt really satisfying to be able to quickly write up a little game/simulation and have a good idea of what's going on in the memory while it runs.
+It was neat, it felt really satisfying to be able to write up a little game/simulation and have a good idea of what's going on in the memory while it runs.
 This assignment was helpful because I realized that I was passing around instance variables as parameters when I really didn't have 
 to be doing that and I was making it more convoluted than I needed. It was a good reminder to take a moment and think about what information the instance methods have access to and what info they actually needed passed into them.
 I also had to go back and review Random objects in java in the javadoc.
 I feel like I have more practice now with ArrayLists which is nice, because a lot of the programming I do is in python.
 I also started using the command line to run/test java code this assignment, which was new for me.
 As a side note: I had a lot of my methods in GA_Simulation written as private, and I had to change them to public for the autograder.
+I also ended up having a lot of problems with the autograder, and the output it gives is really difficult to debug with.
